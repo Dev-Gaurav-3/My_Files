@@ -1,15 +1,9 @@
-num1 = float(input("Enter a number :"))
-operator = input("Enter Operator :")
-num2 = float(input("Enter a number :"))
+def rev(s,i):
+    ans = ""
+    if(i == 0):
+        return s[0]
+    ans += s[i] + rev(s,i-1)
+    return ans
 
-match operator:
-    case"+":
-        print(num1+num2)
-    case"-":
-        print(num1-num2)
-    case"*":
-        print(num1*num2)
-    case "/":
-        print(num1/num2)
-    case _:
-        print("Enter a valid operator")
+s = "Gaurav"
+print(rev(s,len(s)-1))
