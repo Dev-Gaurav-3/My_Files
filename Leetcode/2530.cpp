@@ -1,24 +1,33 @@
-#include<iostream>
-#include<vector>
-#include<algorithm>
+#include <bits/stdc++.h>
 using namespace std;
 
-int main(){
+int main()
+{
+    vector<int> nums = {1, 10, 3, 3, 3};
+    int k = 5;
 
-    vector<int>nums(1000000000);
-    int k = 10000;
-
-    long long ans = 0;
-    
-    while(k--){
-        auto max = max_element(nums.begin(),nums.end());
-        int idx = distance(nums.begin(),max);
-        ans += *max;
-        nums[idx] = int(nums[idx]/3) + 1;
+    priority_queue<int> pq;
+    for (int i : nums)
+    {
+        pq.push(i);
     }
-
-    cout<<ans;
-    
+    int ans = 0;
+    while (k--)
+    {
+        int top = pq.top();
+        pq.pop();
+        ans += top;
+        if (top % 3 == 0)
+        {
+            top /= 3;
+        }
+        else
+        {
+            top /= 3;
+            top++;
+        }
+        pq.push(top);
+    }
 
     return 0;
 }
