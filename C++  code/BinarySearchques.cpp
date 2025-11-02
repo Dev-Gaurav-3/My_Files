@@ -17,7 +17,7 @@ public:
 
 int target(Node *root, int target_sum)
 {
-    // done in leetcode //
+    // done on leetcode //
 }
 
 int main()
