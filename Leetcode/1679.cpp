@@ -2,24 +2,24 @@
 using namespace std;
 
 int main(){
-    vector<int>nums = {1,2,3,4};
+    vector<int>nums = {3,1,3,4,3};
     int k = 5;
 
-    unordered_map<int,int>mp;
-    for(int i : nums){
-        mp[i]++;
-    }
-    int ans = 0;
-    for(auto ele:mp){
-        int num = ele.first;
-        if(mp[k-num] && mp[k-num]>0){
-            ans++;
-            mp[num]--;
-            mp[k-num]--;
+    sort(nums.begin(),nums.end());
+    int l = 0,r = nums.size()-1;
+    int op = 0;
+    while(l<r){
+        if(nums[l]+nums[r] == k){
+            op++,l++,r--;
         }
+        else if(nums[l]+nums[r]<k){
+            l++;
+        }
+        else r--;
     }
 
-    cout<<ans;
+    cout<<op;
+
 
   return 0;
 }

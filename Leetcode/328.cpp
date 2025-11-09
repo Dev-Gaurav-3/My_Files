@@ -13,12 +13,5 @@ int main(){
     head->next->next = new ListNode(3);
     head->next->next->next = new ListNode(4);
     head->next->next->next->next = new ListNode(5);
-
-    
-
-    ListNode* t = head;
-    while(t){
-        cout << t->val << " ";
-        t = t->next;
-    }
+    return 0;
 }
