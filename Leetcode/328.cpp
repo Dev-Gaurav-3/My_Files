@@ -13,5 +13,21 @@ int main(){
     head->next->next = new ListNode(3);
     head->next->next->next = new ListNode(4);
     head->next->next->next->next = new ListNode(5);
+
+    // if (!head || !head->next) return head;
+
+        ListNode* odd = head;
+        ListNode* even = head->next;
+        ListNode* evenHead = even;
+
+        while (even && even->next) {
+            odd->next = even->next;
+            odd = odd->next;
+            even->next = odd->next;  
+            even = even->next;       
+        }
+
+        odd->next = evenHead;
+
     return 0;
 }
