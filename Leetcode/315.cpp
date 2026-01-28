@@ -1,28 +1,33 @@
-#include<iostream>
-#include<vector>
+#include<bits/stdc++.h>
 using namespace std;
 
 int main(){
-
     vector<int>nums = {5,2,6,1};
-    vector<int>ans;
-    
-    int n;
-
-    for (int i = 0; i < nums.size()-1; i++)
+    map<int,vector<int>>mp;
+    for (int i = 0;i<nums.size();i++)
     {
-        n = 0;
-        for (int j = i+1; j < nums.size(); j++)
+        mp[nums[i]].push_back(i);
+    }
+    vector<int>ans(nums.size(),0);
+    for (int i = 0; i < nums.size(); i++)
+    {
+        int cnt = 0;
+        for (auto &j : mp)
         {
-            if(nums[i]<nums[j]){
-                n++;
-            }
+            if(j.first >= nums[i]) break;
+            auto lb = upper_bound(j.second.begin(),j.second.end(),i);
+            cnt += (j.second.end() - lb);
         }
-        ans.push_back(n);
-        
+        ans[i] = cnt;
+    }
+
+    for (auto &i : ans)
+    {
+        cout<<i<<" ";
     }
     
     
+    
 
-    return 0;
+  return 0;
 }
