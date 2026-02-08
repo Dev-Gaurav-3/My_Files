@@ -18,16 +18,41 @@ int main(){
     head->next->next->next = new ListNode(4);
     head->next->next->next->next= new ListNode(5);
 
-    ListNode* prev = NULL;
+    int k = 5;
 
+    ListNode* ans = new ListNode();
+    ListNode* dummy = ans;
     ListNode* temp = head;
+    stack<ListNode*>st;
     while(temp){
-        prev->next = temp;
-        temp = temp->next;
-        prev = prev->next;
+        int cnt = k;
+        while(temp && cnt--){
+            st.push(temp);
+            temp = temp->next;
+        }
+        if(st.size() != k){
+            stack<ListNode*>rev;
+            while (!st.empty())
+            {
+                rev.push(st.top());
+                st.pop();
+            }
+            while(!rev.empty()){
+                dummy->next = rev.top();
+                dummy = dummy->next;
+                rev.pop();
+            }
+        }
+        while(!st.empty()){
+            dummy->next = st.top();
+            dummy = dummy->next;
+            st.pop();
+        }
+        dummy->next = NULL;
     }
-    
-
-
+    while(ans){
+        cout<<ans->val<<"->";
+        ans = ans->next;
+    }
   return 0;
 }
