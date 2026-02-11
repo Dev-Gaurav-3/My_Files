@@ -1,25 +1,30 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <map>
+#include<bits/stdc++.h>
 using namespace std;
 
-int main()
-{
+int main(){
+    vector<int>nums = {1,2,3,3,4,4,5,6};
+    int k = 4;
 
-    vector<int> nums = {3, 2, 1, 2, 3, 4, 3, 4, 5, 9, 10, 11};
-    int k = 3;
+    if(nums.size() % k != 0) return false;
 
-    map<int, int> mp;
+        map<int,int> mp;
+        for(int i : nums) mp[i]++;
 
-    for (int i : nums)
-    {
-        mp[i]++;
-    }
+        while (!mp.empty()) {
+            auto itr = mp.begin();
+            int cnt = itr->first;
 
-    while (!mp.empty())
-    {
-    }
+            for(int i = 0; i < k; i++) {
+                if (itr == mp.end() || itr->first != cnt)
+                    return false;
 
-    return 0;
+                itr->second--;
+                if (itr->second == 0)
+                    itr = mp.erase(itr);
+                else
+                    ++itr;
+
+                cnt++;
+            }
+        }
 }
