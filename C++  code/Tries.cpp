@@ -52,7 +52,7 @@ int main(){
         trie.insert(x);
     }
 
-    cout << trie.search("an") << endl;
+    cout << trie.search("the") << endl;
 
 
     return 0;
