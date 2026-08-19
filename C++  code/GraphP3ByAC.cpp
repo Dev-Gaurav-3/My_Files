@@ -54,6 +54,35 @@ public:
         return s;
     }
 
+    void calcInDegree(vector<int>&indeg){
+        for(int i = 0;i<V;i++){
+            list<int>neigh = l[i];
+            for(int v : neigh){
+                indeg[v]++;
+            }
+        }
+    }
+
+    void Topo2(){
+        // push nodes with indegree 0 in queue
+        vector<int>indeg(V,0);
+        calcInDegree(indeg);
+        queue<int>q;
+        for(int i = 0;i<V;i++){
+            if(indeg[i] == 0) q.push(i);
+        }
+        while(!q.empty()){
+            int curr = q.front();
+            q.pop();
+            list<int>neigh = l[curr];
+            for(int i : neigh){
+                indeg[i]--;
+                if(indeg[i] == 0) q.push(i);
+            }
+            cout << curr << " ";
+        }
+        cout << endl;
+    }
 };
 
 int main(){
@@ -71,12 +100,21 @@ int main(){
 
     // Graph.print();
 
-    stack<int>s = Graph.TopoDfs(5);
-    while(!s.empty()){
-        cout << s.top() << " ";
-        s.pop();
-    }
-    cout << endl;
+    // stack<int>s = Graph.TopoDfs(5);
+    // while(!s.empty()){
+    //     cout << s.top() << " ";
+    //     s.pop();
+    // }
+    // cout << endl;
+
+    //? a DAG has atleast one vertex with 0 indegree & atleast one vertex with 0 outdegree -> KAHN's ALGO 
+
+    // Graph.Topo2();
+
+    //? cycle detection using kahn's -> if after processing all nodes if there are nodes still with non zero indegree 
+
+    
+
 
     
     return 0;
